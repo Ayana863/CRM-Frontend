@@ -40,7 +40,7 @@ function Register() {
 
         try {
 
-            await API.post("/auth/register", { name, email, password })
+           await API.post("/api/auth/register", { name, email, password })
 
             toast.success("Registration Successful")
 
