@@ -22,7 +22,7 @@ function Customers() {
     const [editId, setEditId] = useState(null)
 
     const getCustomers = async () => {
-        const res = await API.get("/customers")
+        const res = await API.get("/api/customers")
         setCustomers(res.data)
     }
 
@@ -55,11 +55,11 @@ function Customers() {
         try {
 
             if (editId) {
-                await API.put(`/customers/${editId}`, { name, email, phone, company })
+                await API.put(`/api/customers/${editId}`, { name, email, phone, company })
                 setEditId(null)
                 toast.success("Customer Updated")
             } else {
-                await API.post("/customers", { name, email, phone, company })
+                await API.post("/api/customers", { name, email, phone, company })
                 toast.success("Customer Added")
             }
 
@@ -79,7 +79,7 @@ function Customers() {
 
     // delete
     const deleteCustomer = async (id) => {
-        await API.delete(`/customers/${id}`)
+        await API.delete(`/api/customers/${id}`)
         toast.success("Customer Deleted")
         getCustomers()
     }
