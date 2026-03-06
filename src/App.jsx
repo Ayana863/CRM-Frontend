@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import Customers from "./pages/Customers";
-import NavbarComponent from "./components/NavbarComponent";
+import Login from './Pages/Login'
+import Register from "./Pages/Register";
+import Dashboard from "./Pages/Dashboard";
+import Customers from "./Pages/Customers";
+import NavbarComponent from "./components/NavbarComponent"
 
 function App(){
 
