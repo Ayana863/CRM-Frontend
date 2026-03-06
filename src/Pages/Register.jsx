@@ -15,9 +15,9 @@ function Register() {
 
     const navigate = useNavigate();
 
-
     // handle register
     const handleRegister = async (e) => {
+
         e.preventDefault()
 
         // check empty fields
@@ -27,8 +27,8 @@ function Register() {
         }
 
         // email validation
-        if (!email.includes("@")) {
-            setEmailError("Email is not correct Eg:example@gmail.com")
+        if (!email.includes("@") || !email.includes(".")) {
+            setEmailError("Email is not correct Eg: example@gmail.com")
             return
         }
 
@@ -43,13 +43,21 @@ function Register() {
             await API.post("/auth/register", { name, email, password })
 
             toast.success("Registration Successful")
-            navigate("/login")
+
+            setName("")
+            setEmail("")
+            setPassword("")
+
+            setTimeout(() => {
+                navigate("/login")
+            }, 1500)
 
         } catch (err) {
 
-            toast.warning("User already registered")
+            toast.error(err.response?.data?.message || "User already registered")
 
         }
+
     }
 
     return (
@@ -76,6 +84,7 @@ function Register() {
                                         <Form.Control
                                             type="text"
                                             placeholder="Enter your name"
+                                            value={name}
                                             onChange={(e) => setName(e.target.value)}
                                         />
 
@@ -90,6 +99,7 @@ function Register() {
                                         <Form.Control
                                             type="email"
                                             placeholder="Enter your email"
+                                            value={email}
                                             onChange={(e) => {
                                                 setEmail(e.target.value)
                                                 setEmailError("")
@@ -111,6 +121,7 @@ function Register() {
                                         <Form.Control
                                             type="password"
                                             placeholder="Enter password"
+                                            value={password}
                                             onChange={(e) => {
                                                 setPassword(e.target.value)
                                                 setPasswordError("")
@@ -148,7 +159,6 @@ function Register() {
             <ToastContainer position="top-right" autoClose={5000} />
 
         </>
-
     )
 
 }
