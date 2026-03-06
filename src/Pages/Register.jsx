@@ -40,7 +40,7 @@ function Register() {
 
         try {
 
-           await API.post("/api/auth/register", { name, email, password })
+            await API.post("/api/auth/register", { name, email, password })
 
             toast.success("Registration Successful")
 
@@ -54,10 +54,11 @@ function Register() {
 
         } catch (err) {
 
-            toast.error(err.response?.data?.message || "User already registered")
+            console.log(err.response)
+
+            toast.error(err.response?.data?.message || "Something went wrong")
 
         }
-
     }
 
     return (
