@@ -1,46 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-import Login from './Pages/Login'
+import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Dashboard from "./Pages/Dashboard";
 import Customers from "./Pages/Customers";
-import NavbarComponent from "./components/NavbarComponent"
+import NavbarComponent from "./components/NavbarComponent";
 
-function App(){
+function App() {
 
-const token = localStorage.getItem("token");
+    const [token, setToken] = useState(null)
 
-return(
+    useEffect(() => {
+        const storedToken = localStorage.getItem("token")
+        setToken(storedToken)
+    }, [])
 
-<Router>
+    return (
 
-<NavbarComponent/>
+        <Router>
 
-<Routes>
+            <NavbarComponent />
 
-<Route path="/" element={<Navigate to="/register" />} />
+            <Routes>
 
-<Route path="/login" element={<Login/>} />
+                <Route path="/" element={<Navigate to="/register" />} />
 
-<Route path="/register" element={<Register/>} />
+                <Route path="/login" element={<Login />} />
 
-<Route
-path="/dashboard"
-element={token ? <Dashboard/> : <Navigate to="/login"/>}
-/>
+                <Route path="/register" element={<Register />} />
 
-<Route
-path="/customers"
-element={token ? <Customers/> : <Navigate to="/login"/>}
-/>
+                <Route
+                    path="/dashboard"
+                    element={token ? <Dashboard /> : <Navigate to="/login" />}
+                />
 
-</Routes>
+                <Route
+                    path="/customers"
+                    element={token ? <Customers /> : <Navigate to="/login" />}
+                />
 
-</Router>
+            </Routes>
 
-)
+        </Router>
 
+    )
 }
 
-export default App;
+export default App
